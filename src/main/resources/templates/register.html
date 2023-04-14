@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" th:href="@{/css/register.css}"/>
+  <title>Sign Up</title>
+</head>
+<body>
+
+  <form action="#" id="signup-form"
+    th:action="@{/signup}" th:object="${registerForm}" method="post">
+    <div class="container">
+      <div th:replace="fragments/alert :: alertCommon"></div>
+      <h1>Sign up</h1>
+      <p>Please fill in this form to create an account.</p>
+      <div>
+        <label for="email"><b>Email</b></label>
+        <input type="email" th:field="*{email}" placeholder="Enter Email" name="email" id="email" required>
+      </div>
+        <p th:if="${emailError}" class="invalid error" th:text="${emailError}"></p>
+      <div>
+        <label for="psw"><b>Password</b></label>
+        <input type="password" th:field="*{passcode}" placeholder="Enter Password" name="psw" id="psw" required>
+      </div>
+  <!--    <label for="psw-repeat"><b>Repeat Password</b></label>-->
+  <!--    <input type="password" placeholder="Repeat Password" name="psw-repeat" id="psw-repeat" required>-->
+      <div id="message">
+        <h4>Password must contain the following:</h4>
+        <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
+        <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
+        <p id="number" class="invalid">A <b>number</b></p>
+        <p id="length" class="invalid">Minimum <b>8 characters</b></p>
+      </div>
+
+      <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
+
+      <button type="submit" class="signup-btn">Sign Up</button>
+    </div>
+
+    <div class="container sign-in">
+      <p>Already have an account? <a href="/login">Sign in.</a></p>
+    </div>
+  </form>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script type="text/javascript" th:src="@{/js/register.js}"></script>
+  <script type="text/javascript" th:src="@{/js/common.js}"></script>
+</body>
+</html>

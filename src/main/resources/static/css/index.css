@@ -1,0 +1,104 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: black;
+}
+* {
+    box-sizing: border-box;
+}
+
+form {border: 3px solid #f1f1f1;}
+
+input[type=email], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    background: #f1f1f1;
+}
+
+input[type=email]:focus, input[type=password]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+button {
+    background-color: #04AA6D;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+/*.cancel-btn {*/
+/*  width: auto;*/
+/*  padding: 10px 18px;*/
+/*  background-color: #f44336;*/
+/*}*/
+
+/*.img-container {*/
+/*  text-align: center;*/
+/*  margin: 24px 0 12px 0;*/
+/*}*/
+
+/*img.avatar {*/
+/*  width: 40%;*/
+/*  border-radius: 50%;*/
+/*}*/
+
+.container {
+    padding: 16px;
+    background-color: white;
+}
+
+a {
+    color: dodgerblue;
+}
+
+/*a.psw {*/
+/*  float: right;*/
+/*  text-decoration: none;*/
+/*}*/
+
+/*a.signup {*/
+/*  text-decoration: none;*/
+/*}  */
+
+p.signup {
+    text-align: center;
+}
+/* Change styles for a and cancel button on extra small screens
+@media screen and (max-width: 300px) {
+  a.psw {
+	 display: block;
+     float: none;
+  }
+  .cancel-btn {
+     width: 100%;
+  }
+} */
+
+.invalid {
+    color: red;
+}
+
+.invalid:before {
+    position: relative;
+    left: -35px;
+    content: "✖";
+}
+
+.error {
+    background: #f1f1f1;
+    color: red;
+    position: relative;
+    padding: 20px 35px;
+    font-size: 16px;
+    margin-top: 10px;
+}

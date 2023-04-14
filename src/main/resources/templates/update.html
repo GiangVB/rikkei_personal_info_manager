@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/user.css}">
+    <title>Personal Information</title>
+</head>
+<body>
+<h1 style="text-align: center">Personal Information</h1>
+<div class="tab">
+    <button class="tab-links" onclick="openTab(event, 'personal-info')" id="defaultOpen">Personal Information</button>
+    <button class="tab-links" onclick="openTab(event, 'change-info')">Update Information </button>
+    <button class="tab-links" onclick="openTab(event, 'change-password')">Change Password</button>
+    <form th:action="@{/logout}">
+        <button class="tab-links">Logout</button>
+    </form>
+    <!--        <button class="tab-links" onclick="openTab(event, 'change-avatar')">Change Avatar</button>-->
+</div>
+
+
+<div id="personal-info" class="tab-content">
+    <!-- Personal Info tab content goes here -->
+    <h2>Personal Information</h2>
+    <div th:if="${user}">
+        <div>
+            <label for="fullName"><b>Full Name:</b></label>
+            <input type="text" id="fullName" name="fullName" disabled th:value="${user.fullName}">
+        </div>
+        <div>
+            <label><b>Sex:</b></label>
+            <input type="radio" name="sex" class="sex" disabled id="male" th:value="true" th:checked="${user.sex}">
+            <label for="male">Male</label>
+            <input type="radio" name="sex" class="sex" disabled id="female" th:value="false" th:checked="${!user.sex}">
+            <label for="female">Female</label>
+        </div>
+        <div>
+            <label for="birthday"><b>Birthday:</b></label>
+            <input type="date" id="birthday" name="birthday" disabled th:value="${#dates.format(user.birthday, 'yyyy-MM-dd')}">
+        </div>
+        <div>
+            <label for="phoneNumber"><b>Phone Number:</b></label>
+            <input type="text" id="phoneNumber" name="phoneNumber" disabled th:value="${user.phoneNumber}">
+        </div>
+        <div>
+            <label for="address"><b>Address:</b></label>
+            <input type="text" id="address" name="address" disabled th:value="${user.address}">
+        </div>
+        <div>
+            <label for="idNumber"><b>ID Number:</b></label>
+            <input type="text" id="idNumber" name="idNumber" disabled th:value="${user.idNumber}">
+        </div>
+    </div>
+</div>
+<div id="change-info" class="tab-content">
+    <!-- Update Info tab content goes here -->
+    <div th:replace="fragments/alert :: alertCommon"></div>
+    <h2>Update Information</h2>
+    <form action="#" id="update-form"
+          th:action="@{/user/{userId}/update(userId=*{userId})}" th:object="${user}" method="post">
+        <input type="hidden" id="userId" th:field="*{userId}">
+        <div>
+            <label for="update-fullName"><b>Full Name:</b></label>
+            <input type="text" id="update-fullName" name="fullName" th:field="*{fullName}">
+        </div>
+        <div>
+            <label><b>Sex:</b></label>
+            <input type="radio" name="sex" class="sex" id="update-male" th:value="true" th:checked="*{sex}">
+            <label for="update-male">Male</label>
+            <input type="radio" name="sex" class="sex" id="update-female" th:value="false" th:checked="*{!sex}">
+            <label for="update-female">Female</label>
+        </div>
+        <div>
+            <label for="update-birthday"><b>Birthday:</b></label>
+            <input type="date" id="update-birthday" name="birthday" th:value="*{#dates.format(birthday, 'yyyy-MM-dd')}">
+        </div>
+        <div>
+            <label for="update-phoneNumber"><b>Phone Number:</b></label>
+            <input type="text" id="update-phoneNumber" name="phoneNumber" th:field="*{phoneNumber}">
+        </div>
+        <div>
+            <label for="update-address"><b>Address:</b></label>
+            <input type="text" id="update-address" name="address" th:field="*{address}">
+        </div>
+        <div>
+            <label for="update-idNumber"><b>ID Number:</b></label>
+            <input type="text" id="update-idNumber" name="idNumber" th:field="*{idNumber}">
+        </div>
+        <button type="submit" class="change-btn" id="save-btn">Save</button>
+    </form>
+</div>
+<!--<div id="change-password" class="tab-content">-->
+<!--    &lt;!&ndash; Change Password tab content goes here &ndash;&gt;-->
+<!--    <div th:replace="fragments/alert :: alertCommon"></div>-->
+<!--    <h2>Change Password</h2>-->
+<!--    <form id="change-password-form" method="post">-->
+<!--        <div>-->
+<!--            <label for="current-password">Current Password:</label>-->
+<!--            <input type="password" id="current-password" name="currentPassword" required>-->
+<!--        </div>-->
+<!--        <div>-->
+<!--            <label for="new-password">New Password:</label>-->
+<!--            <input type="password" id="new-password" name="newPassword" required>-->
+<!--        </div>-->
+<!--        &lt;!&ndash;            <div>&ndash;&gt;-->
+<!--        &lt;!&ndash;                <label for="confirm-password">Confirm Password:</label>&ndash;&gt;-->
+<!--        &lt;!&ndash;                <input type="password" id="confirm-password" name="confirmPassword" required>&ndash;&gt;-->
+<!--        &lt;!&ndash;            </div>&ndash;&gt;-->
+<!--        <div id="message">-->
+<!--            <h4>Password must contain the following:</h4>-->
+<!--            <p id="letter" class="invalid">A <b>lowercase</b> letter</p>-->
+<!--            <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>-->
+<!--            <p id="number" class="invalid">A <b>number</b></p>-->
+<!--            <p id="length" class="invalid">Minimum <b>8 characters</b></p>-->
+<!--        </div>-->
+<!--        <button type="submit" class="change-btn" id="change-password-btn">Change Password</button>-->
+<!--    </form>-->
+<!--</div>-->
+<!--    <div id="change-avatar" class="tab-content">-->
+<!--        &lt;!&ndash; Change Avatar tab content goes here &ndash;&gt;-->
+<!--        <h2>Change Avatar</h2>-->
+<!--        <form id="change-avatar-form" th:action="@{/user/{userId}/change-avt(userId=*{userId})}" th:object="${user}"-->
+<!--              method="post" enctype="multipart/form-data">-->
+<!--            <div>-->
+<!--                <img th:src="${user.avatar}" alt="Avatar" class="avatar" src="#">-->
+<!--            </div>-->
+<!--            <div>-->
+<!--                <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" required><br>-->
+<!--            </div>-->
+<!--            <button type="submit" class="change-btn" id="change-avatar-btn">Change Avatar</button>-->
+<!--        </form>-->
+<!--    </div>-->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script type="text/javascript" th:src="@{/js/user.js}"></script>
+<script type="text/javascript" th:src="@{/js/common.js}"></script>
+</body>
+</html>
